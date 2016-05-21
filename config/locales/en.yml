@@ -21,3 +21,21 @@
 
 en:
   hello: "Hello world"
+  
+  
+  # Error messages specific to Post resource
+  activerecord:
+    errors:
+      models:
+        post:
+          attributes:
+            title:
+              blank: 'SHOULD NOT BE EMPTY! :)'
+              taken: 'has already a duplicate'
+  
+  # Error messages for any resource
+  errors:
+    messages:
+      blank: 'SHOULD NOT BE EMPTY! :)'
+      taken: 'has already a duplicate'
+

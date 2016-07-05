@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :posts
+  resources :posts do
+    get 'index2' => :index2, on: :collection
+  end
   controller :about do
     get '/about' => :index, as: :about
     get '/about/contact' => :contact, as: :contact

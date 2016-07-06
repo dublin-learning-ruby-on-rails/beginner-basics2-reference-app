@@ -71,7 +71,7 @@ class PostsController < ApplicationController
   def authorise
     # only signed in users can perform action on this controller
     unless user_signed_in?
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, alert: 'Unauthorised Access'
     end
   end
 

@@ -17,8 +17,12 @@ class UsersController < ApplicationController
   def authorise
     case action_name
     when 'show'
-      # only allow showing own user profile page, and prohibit others showing other profile pages
-      redirect_to new_user_session_path if !user_signed_in? || current_user != @user
+      if !user_signed_in?
+        redirect_to new_user_session_path, alert: 'Unauthorised Access'
+      elsif current_user != @user
+        # only allow showing own user profile page, and prohibit others showing other profile pages
+        redirect_to :back, alert: 'Unauthorised Access. You can only view your own profile page.'
+      end
     end
   end
 

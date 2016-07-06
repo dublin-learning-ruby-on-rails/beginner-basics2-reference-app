@@ -20,10 +20,14 @@ class CommentsController < ApplicationController
   def authorise
     case action_name
     when 'create'
-      redirect_to new_user_session_path if !user_signed_in?
+      redirect_to new_user_session_path, alert: 'Unauthorised Access' if !user_signed_in?
     when 'destroy'
-      # only allow destroying of comment if the user is the creator of the comment
-      redirect_to new_user_session_path if !user_signed_in? || current_user != @comment.user
+      if !user_signed_in?
+        redirect_to new_user_session_path, alert: 'Unauthorised Access'
+      elsif current_user != @comment.user
+        # only allow destroying of comment if the user is the creator of the comment
+        redirect_to :back, alert: 'Unauthorised Access. You can only remove your own comments.'
+      end
     end
   end
 

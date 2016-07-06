@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: :destroy
   before_action :authorise
 
   def create
@@ -11,7 +12,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to posts_url, notice: 'Comment was successfully destroyed.'
+    redirect_to :back, notice: 'Comment was successfully destroyed.'
   end
 
   private
@@ -24,6 +25,10 @@ class CommentsController < ApplicationController
       # only allow destroying of comment if the user is the creator of the comment
       redirect_to new_user_session_path if !user_signed_in? || current_user != @comment.user
     end
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

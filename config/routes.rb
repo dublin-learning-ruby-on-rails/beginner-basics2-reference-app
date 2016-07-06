@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users, only: :show
   resources :posts
+  resources :comments, only: [:create, :destroy]
   controller :about do
     get '/about' => :index, as: :about
     get '/about/contact' => :contact, as: :contact

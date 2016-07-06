@@ -9,7 +9,7 @@
   <body>
     <nav>
       <%= link_to 'Posts', posts_path %>
-      <%= link_to 'My Profile Page', user_path(current_user) %>
+      <%= link_to 'My Profile Page', user_path(current_user) if user_signed_in? %>
       <% unless user_signed_in? %>
         <%= link_to 'Log In', new_user_session_path %>
       <% else %>

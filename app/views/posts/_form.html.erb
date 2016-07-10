@@ -2,15 +2,13 @@
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
       <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -18,6 +16,14 @@
   <div class="field">
     <%= f.label :content %><br>
     <%= f.text_area :content %>
+  </div>
+  <div class="attachments">
+    <%= f.fields_for :attachments do |ff| %>
+      <%= render 'attachment_fields', f: ff %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'Add Attachment', f, :attachments %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>

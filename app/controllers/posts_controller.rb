@@ -24,9 +24,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    puts params
     puts post_params
     @post = Post.new(post_params)
+    @post.user = current_user if user_signed_in?
 
     respond_to do |format|
       if @post.save

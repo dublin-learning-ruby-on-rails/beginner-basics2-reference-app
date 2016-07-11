@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  has_many :comments, as: :commentable
 
   scope :title_containing, -> (substring) { where('title LIKE ?', "%#{substring}%") }
 

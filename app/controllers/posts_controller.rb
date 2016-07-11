@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @posts = @posts.where( id: Post.title_containing(params[:title_contains]) ) if params[:title_contains].present?
   end
 
   # GET /posts/1

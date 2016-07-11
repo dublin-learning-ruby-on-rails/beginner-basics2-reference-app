@@ -38,7 +38,13 @@ div {
 }
 
 #notice {
-  color: green;
+  $notice-color: #cce;
+  width: 100%;
+  border: 1px solid darken($notice-color, 5);
+  background: $notice-color;
+  padding: 1rem;
+  color: darken($notice-color, 50);
+  border-radius: 2px;
 }
 
 .field_with_errors {
